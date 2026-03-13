@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { fadeUp } from "../../../variants"
+import { fadeUp } from "../variants"
 import "./ContactSection.css"
 
 export default function ContactSection() {

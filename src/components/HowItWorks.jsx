@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { fadeUp, slideRight } from "../../../variants"
+import { fadeUp, slideRight } from "../variants"
 import "./HowItWorks.css"
 
 const STEPS = [

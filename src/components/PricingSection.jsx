@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { fadeUp, scaleIn } from "../../../variants"
+import { fadeUp, scaleIn } from "../variants"
 import "./PricingSection.css"
 
 const PLANS = [

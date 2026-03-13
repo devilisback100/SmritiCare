@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { fadeUp, scaleIn } from "../../../variants"
+import { fadeUp, scaleIn } from "../variants"
 import "./FeaturesSection.css"
 
 const FEATURES = [

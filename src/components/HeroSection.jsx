@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { fadeUp, scaleIn } from "../../../variants"
+import { fadeUp, scaleIn } from "../variants"
 import "./HeroSection.css"
 
 const STATS = [
