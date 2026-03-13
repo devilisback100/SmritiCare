@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { ArrowLeft, MoreHorizontal, Phone, MessageCircle } from "lucide-react"
@@ -6,22 +6,9 @@ import { fadeUp } from "../../variants"
 import { CaregiverSidebar } from "../../components/layout/AppSidebar"
 import "./AlertsNotifications.css"
 
-const ALERTS_DATA = [
-    { id: 1, icon: "💊", iconBg: "#C0482822", title: "Morning medicine missed", desc: "Clara has not taken Amlodipine 5mg. Reminder sent 3 times.", time: "Today · 9:00 AM", type: "urgent", category: "medicine", resolved: false, actions: ["resolve", "call"] },
-    { id: 2, icon: "🚶", iconBg: "#C8874A22", title: "Exercise not started", desc: "Memory exercise at 11:00 AM has not been opened yet.", time: "Today · 11:30 AM", type: "warning", category: "routine", resolved: false, actions: ["resolve", "nudge"] },
-    { id: 3, icon: "😶", iconBg: "#C8874A22", title: "No interaction for 90 mins", desc: "Clara hasn't responded to companion since 8:42 AM.", time: "Today · 10:12 AM", type: "warning", category: "safety", resolved: false, actions: ["resolve", "call"] },
-    { id: 4, icon: "🍳", iconBg: "#4A8C3F22", title: "Breakfast reminder", desc: "Clara confirmed breakfast at 8:30 AM.", time: "Today · 8:30 AM", type: "info", category: "routine", resolved: true, actions: [] },
-    { id: 5, icon: "📍", iconBg: "#4A8C3F22", title: "Location verified", desc: "Clara is within the safe zone — home as expected.", time: "Today · 7:45 AM", type: "info", category: "safety", resolved: true, actions: [] },
-]
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 const TABS = ["All", "Urgent", "Medicine", "Safety", "Routine"]
-
-const typeStyle = {
-    urgent: { badge: "Urgent", bg: "#C0482822", color: "#E8674A" },
-    warning: { badge: "Warning", bg: "#C8874A22", color: "#E8974A" },
-    info: { badge: "Info", bg: "#8B5E3C44", color: "#C8874A" },
-    resolved: { badge: "Resolved", bg: "#4A8C3F22", color: "#6FBF65" },
-}
 
 const navItems = [
     { icon: "📊", label: "Dashboard", path: "/caregiver/dashboard", idx: 0 },
@@ -30,13 +17,87 @@ const navItems = [
     { icon: "⚙️", label: "Settings", path: "/caregiver/settings", idx: 3 },
 ]
 
+const TYPE_META = {
+    missed_reminder: {
+        icon: "💊", iconBg: "#C0482822", type: "urgent", category: "medicine",
+        badge: "Urgent", badgeBg: "#C0482822", badgeColor: "#E8674A",
+    },
+    no_interaction: {
+        icon: "😶", iconBg: "#C8874A22", type: "warning", category: "safety",
+        badge: "Warning", badgeBg: "#C8874A22", badgeColor: "#E8974A",
+    },
+    location_safe: {
+        icon: "📍", iconBg: "#4A8C3F22", type: "info", category: "safety",
+        badge: "Info", badgeBg: "#4A8C3F22", badgeColor: "#6FBF65",
+    },
+    default: {
+        icon: "🔔", iconBg: "#C8874A22", type: "warning", category: "routine",
+        badge: "Warning", badgeBg: "#C8874A22", badgeColor: "#E8974A",
+    },
+}
+
+const RESOLVED_STYLE = { badge: "Resolved", bg: "#4A8C3F22", color: "#6FBF65" }
+
+function enrichAlert(raw) {
+    const meta = TYPE_META[raw.type] || TYPE_META.default
+    return {
+        ...raw,
+        ...meta,
+        resolved: raw.resolved ?? false,
+        title: raw.title || raw.type?.replace(/_/g, " ") || "Alert",
+        desc: raw.desc || "",
+        time: raw.time || raw.created_at || "",
+        actions: raw.actions || (meta.type === "urgent" ? ["resolve", "call"] : ["resolve", "nudge"]),
+    }
+}
+
 export default function AlertsNotifications() {
     const navigate = useNavigate()
-    const [alerts, setAlerts] = useState(ALERTS_DATA)
+    const user = JSON.parse(localStorage.getItem("user") || "{}")
+    const patientId = user?.patient_id || user?.id
+
+    const [alerts, setAlerts] = useState([])
     const [activeTab, setActiveTab] = useState("All")
+    const [loading, setLoading] = useState(true)
+
+    const authHeader = () => ({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    })
+
+    useEffect(() => {
+        if (!patientId) return
+        fetchAlerts()
+    }, [patientId])
+
+    const fetchAlerts = async () => {
+        setLoading(true)
+        try {
+            const res = await fetch(`${BASE_URL}/logic/realtime/${patientId}`, { headers: authHeader() })
+            if (res.ok) {
+                const data = await res.json()
+                const raw = Array.isArray(data) ? data : data.alerts || []
+                setAlerts(raw.map(enrichAlert))
+            }
+        } catch {
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const createAlert = async (type) => {
+        try {
+            const res = await fetch(`${BASE_URL}/logic/alert`, {
+                method: "POST",
+                headers: authHeader(),
+                body: JSON.stringify({ patient_id: patientId, type }),
+            })
+            if (res.ok) fetchAlerts()
+        } catch { }
+    }
 
     const resolve = (id) =>
-        setAlerts(prev => prev.map(a => a.id === id ? { ...a, resolved: true } : a))
+        setAlerts(prev => prev.map(a => a._id === id || a.id === id ? { ...a, resolved: true } : a))
 
     const filtered = alerts.filter(a => {
         if (activeTab === "All") return true
@@ -64,7 +125,9 @@ export default function AlertsNotifications() {
                         </motion.button>
                         <div>
                             <p className="alerts-header-title">Alerts</p>
-                            <p className="alerts-header-sub">Clara Fernandez</p>
+                            <p className="alerts-header-sub">
+                                {user?.patient_name || "Patient"}
+                            </p>
                         </div>
                         <motion.button whileTap={{ scale: 0.9 }} className="alerts-more-btn">
                             <MoreHorizontal size={16} color="#A08060" />
@@ -101,64 +164,74 @@ export default function AlertsNotifications() {
                     </motion.div>
 
                     <div className="alerts-list">
-                        <AnimatePresence>
-                            {filtered.length === 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    className="alerts-empty"
-                                >
-                                    <p className="alerts-empty-icon">✅</p>
-                                    <p className="alerts-empty-text">All clear — no alerts here</p>
-                                </motion.div>
-                            )}
-
-                            {filtered.map((alert, i) => {
-                                const style = alert.resolved ? typeStyle.resolved : typeStyle[alert.type]
-                                return (
-                                    <motion.div key={alert.id}
-                                        variants={fadeUp} initial="hidden" animate="visible"
-                                        exit={{ opacity: 0, x: 40, transition: { duration: 0.3 } }}
-                                        custom={3 + i}
-                                        className={`alerts-card ${alert.type === "urgent" && !alert.resolved ? "urgent-card" : "normal-card"} ${alert.resolved ? "resolved" : ""}`}
+                        {loading ? (
+                            <p style={{ color: "#A08060", fontSize: 14, padding: "16px" }}>Loading alerts...</p>
+                        ) : (
+                            <AnimatePresence>
+                                {filtered.length === 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                        className="alerts-empty"
                                     >
-                                        {alert.type === "urgent" && !alert.resolved && (
-                                            <div className="alerts-urgent-bar" />
-                                        )}
-                                        <div className="alerts-card-body">
-                                            <div className="alerts-card-icon" style={{ backgroundColor: alert.iconBg }}>
-                                                {alert.icon}
-                                            </div>
-                                            <div style={{ flex: 1, minWidth: 0 }}>
-                                                <p className="alerts-card-title">{alert.title}</p>
-                                                <p className="alerts-card-desc">{alert.desc}</p>
-                                                <p className="alerts-card-time">{alert.time}</p>
-                                            </div>
-                                            <span className="alerts-badge"
-                                                style={{ backgroundColor: style.bg, color: style.color }}>
-                                                {style.badge}
-                                            </span>
-                                        </div>
-                                        {alert.actions.length > 0 && !alert.resolved && (
-                                            <div className="alerts-actions">
-                                                <motion.button
-                                                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                                                    onClick={() => resolve(alert.id)}
-                                                    className="alerts-action-btn alerts-btn-resolve">
-                                                    ✓ Mark resolved
-                                                </motion.button>
-                                                <motion.button
-                                                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                                                    className="alerts-action-btn alerts-btn-action">
-                                                    {alert.actions.includes("call")
-                                                        ? <><Phone size={11} /> Call Clara</>
-                                                        : <><MessageCircle size={11} /> Send nudge</>}
-                                                </motion.button>
-                                            </div>
-                                        )}
+                                        <p className="alerts-empty-icon">✅</p>
+                                        <p className="alerts-empty-text">All clear — no alerts here</p>
                                     </motion.div>
-                                )
-                            })}
-                        </AnimatePresence>
+                                )}
+
+                                {filtered.map((alert, i) => {
+                                    const id = alert._id || alert.id
+                                    const style = alert.resolved
+                                        ? RESOLVED_STYLE
+                                        : { badge: alert.badge, bg: alert.badgeBg, color: alert.badgeColor }
+
+                                    return (
+                                        <motion.div key={id}
+                                            variants={fadeUp} initial="hidden" animate="visible"
+                                            exit={{ opacity: 0, x: 40, transition: { duration: 0.3 } }}
+                                            custom={3 + i}
+                                            className={`alerts-card ${alert.type === "urgent" && !alert.resolved ? "urgent-card" : "normal-card"} ${alert.resolved ? "resolved" : ""}`}
+                                        >
+                                            {alert.type === "urgent" && !alert.resolved && (
+                                                <div className="alerts-urgent-bar" />
+                                            )}
+                                            <div className="alerts-card-body">
+                                                <div className="alerts-card-icon" style={{ backgroundColor: alert.iconBg }}>
+                                                    {alert.icon}
+                                                </div>
+                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                    <p className="alerts-card-title">{alert.title}</p>
+                                                    <p className="alerts-card-desc">{alert.desc}</p>
+                                                    <p className="alerts-card-time">{alert.time}</p>
+                                                </div>
+                                                <span className="alerts-badge"
+                                                    style={{ backgroundColor: style.bg, color: style.color }}>
+                                                    {style.badge}
+                                                </span>
+                                            </div>
+
+                                            {alert.actions.length > 0 && !alert.resolved && (
+                                                <div className="alerts-actions">
+                                                    <motion.button
+                                                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                                                        onClick={() => resolve(id)}
+                                                        className="alerts-action-btn alerts-btn-resolve">
+                                                        ✓ Mark resolved
+                                                    </motion.button>
+                                                    <motion.button
+                                                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                                                        onClick={() => createAlert(alert.actions.includes("call") ? "call_caregiver" : "nudge")}
+                                                        className="alerts-action-btn alerts-btn-action">
+                                                        {alert.actions.includes("call")
+                                                            ? <><Phone size={11} /> Call Clara</>
+                                                            : <><MessageCircle size={11} /> Send nudge</>}
+                                                    </motion.button>
+                                                </div>
+                                            )}
+                                        </motion.div>
+                                    )
+                                })}
+                            </AnimatePresence>
+                        )}
                     </div>
                 </div>
 

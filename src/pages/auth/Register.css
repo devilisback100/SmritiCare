@@ -1,0 +1,227 @@
+.register-page {
+    min-height: 100vh;
+    display: flex;
+    background-color: #1A0F07;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-left-panel {
+    display: none;
+    flex: 1;
+    padding: 48px;
+    background: linear-gradient(135deg, #2A1A0E 0%, #1A0F07 100%);
+    border-right: 0.5px solid #3D2B1A;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .register-left-panel {
+        display: flex;
+    }
+}
+
+.register-left-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #FAF4ED;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.register-left-sub {
+    font-size: 15px;
+    color: #A08060;
+    line-height: 1.6;
+    max-width: 340px;
+}
+
+.register-right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 24px 80px;
+    overflow-y: auto;
+}
+
+.register-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    align-self: flex-start;
+}
+
+@media (min-width: 1024px) {
+    .register-logo {
+        display: none;
+    }
+}
+
+.register-logo-dot {
+    width: 32px;
+    height: 32px;
+    background-color: #C8874A;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #FAF4ED;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.register-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #FAF4ED;
+    margin-bottom: 4px;
+}
+
+.register-subtitle {
+    font-size: 14px;
+    color: #A08060;
+}
+
+.register-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #A08060;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+}
+
+.register-input {
+    width: 100%;
+    background: #2A1A0E;
+    border: 0.5px solid #3D2B1A;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #FAF4ED;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.register-input::placeholder {
+    color: #5A3E28;
+}
+
+.register-input:focus {
+    border-color: #C8874A;
+}
+
+.register-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0;
+}
+
+.register-divider-line {
+    flex: 1;
+    height: 0.5px;
+    background-color: #3D2B1A;
+}
+
+.register-divider-text {
+    font-size: 12px;
+    color: #5A3E28;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.register-role-label {
+    font-size: 12px;
+    color: #A08060;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+}
+
+.register-role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.register-role-card {
+    background: #2A1A0E;
+    border: 0.5px solid #3D2B1A;
+    border-radius: 14px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.register-role-card.active {
+    border-color: #C8874A;
+    background: #C8874A15;
+}
+
+.register-role-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.register-role-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FAF4ED;
+    margin-bottom: 2px;
+}
+
+.register-role-desc {
+    font-size: 11px;
+    color: #7A5A40;
+}
+
+.register-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #C8874A, #8B5E3C);
+    color: #FAF4ED;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+}
+
+.register-footer {
+    text-align: center;
+    font-size: 13px;
+    color: #7A5A40;
+}
+
+.register-footer-link {
+    color: #C8874A;
+    font-weight: 500;
+}
+
+.register-footer-link:hover {
+    text-decoration: underline;
+}
