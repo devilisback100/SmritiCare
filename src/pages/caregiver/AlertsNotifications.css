@@ -1,0 +1,350 @@
+.alerts-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #2E1B0E;
+}
+
+.alerts-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.alerts-scroll {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.alerts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+}
+
+.alerts-back-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #3D2B1A;
+    border: 0.5px solid #5C3D22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.alerts-header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #FAF4ED;
+    text-align: center;
+}
+
+.alerts-header-sub {
+    font-size: 12px;
+    color: #A08060;
+    text-align: center;
+}
+
+.alerts-more-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #3D2B1A;
+    border: 0.5px solid #5C3D22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.alerts-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.alerts-sum-card {
+    background-color: #3D2B1A;
+    border: 0.5px solid #5C3D22;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+}
+
+.alerts-sum-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.alerts-sum-label {
+    font-size: 11px;
+    color: #A08060;
+    margin-top: 4px;
+}
+
+.alerts-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px;
+    margin-top: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.alerts-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.alerts-tab {
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: system-ui, sans-serif;
+    transition: all 0.2s;
+}
+
+.alerts-tab.active {
+    background-color: #C8874A;
+    color: #FAF4ED;
+    border: 0.5px solid #C8874A;
+}
+
+.alerts-tab:not(.active) {
+    background-color: #3D2B1A;
+    color: #A08060;
+    border: 0.5px solid #5C3D22;
+}
+
+.alerts-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.alerts-card {
+    background-color: #3D2B1A;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.alerts-card.urgent-card {
+    border: 0.5px solid #C0482866;
+}
+
+.alerts-card.normal-card {
+    border: 0.5px solid #5C3D22;
+}
+
+.alerts-card.resolved {
+    opacity: 0.45;
+}
+
+.alerts-urgent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #C04828, #E8774A);
+}
+
+.alerts-card-body {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    align-items: flex-start;
+}
+
+.alerts-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.alerts-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #FAF4ED;
+    margin-bottom: 3px;
+}
+
+.alerts-card-desc {
+    font-size: 12px;
+    color: #A08060;
+    line-height: 1.5;
+}
+
+.alerts-card-time {
+    font-size: 11px;
+    color: #6B4C35;
+    margin-top: 4px;
+}
+
+.alerts-badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+.alerts-actions {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px 14px;
+    border-top: 0.5px solid #5C3D22;
+}
+
+.alerts-action-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.alerts-btn-resolve {
+    background-color: #4A8C3F22;
+    color: #6FBF65;
+    border: 0.5px solid #4A8C3F44;
+}
+
+.alerts-btn-action {
+    background-color: #C8874A22;
+    color: #E8974A;
+    border: 0.5px solid #C8874A44;
+}
+
+.alerts-empty {
+    text-align: center;
+    padding: 48px 20px;
+}
+
+.alerts-empty-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.alerts-empty-text {
+    font-size: 14px;
+    color: #A08060;
+}
+
+.alerts-bottom-nav {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    z-index: 50;
+    background-color: #3D2B1A;
+    border-top: 0.5px solid #5C3D22;
+    padding: 12px 0 20px;
+}
+
+.alerts-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    opacity: 0.35;
+    background: transparent;
+    border: none;
+}
+
+.alerts-nav-item.active {
+    opacity: 1;
+}
+
+.alerts-nav-icon {
+    font-size: 20px;
+}
+
+.alerts-nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #A08060;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .alerts-header {
+        padding: 24px 32px 0;
+    }
+
+    .alerts-summary {
+        padding: 0 32px;
+        margin-top: 24px;
+    }
+
+    .alerts-tabs {
+        padding: 0 32px;
+        margin-top: 20px;
+    }
+
+    .alerts-list {
+        padding: 0 32px;
+    }
+
+    .alerts-summary {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .alerts-header {
+        padding: 32px 40px 0;
+    }
+
+    .alerts-summary {
+        padding: 0 40px;
+        gap: 16px;
+    }
+
+    .alerts-tabs {
+        padding: 0 40px;
+    }
+
+    .alerts-list {
+        padding: 0 40px;
+    }
+
+    .alerts-bottom-nav {
+        display: none;
+    }
+
+    .alerts-card-title {
+        font-size: 15px;
+    }
+
+    .alerts-card-desc {
+        font-size: 13px;
+    }
+}

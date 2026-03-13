@@ -1,0 +1,166 @@
+.hiw-section {
+    padding: 100px 0;
+    background-color: #FAF4ED;
+}
+
+.hiw-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.hiw-header .section-subheading {
+    margin: 0 auto;
+}
+
+.hiw-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 680px;
+    margin: 0 auto 80px;
+}
+
+.hiw-step {
+    display: flex;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.hiw-connector {
+    position: absolute;
+    left: 19px;
+    top: 48px;
+    width: 1.5px;
+    height: calc(100% - 16px);
+    background: linear-gradient(to bottom, #C8874A, #E8D5B8);
+}
+
+.hiw-step-left {
+    flex-shrink: 0;
+}
+
+.hiw-step-icon-wrap {
+    position: relative;
+    width: 40px;
+}
+
+.hiw-step-num {
+    position: absolute;
+    top: -8px;
+    left: -4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #C8874A;
+    letter-spacing: 0.04em;
+}
+
+.hiw-step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #FDF9F5;
+    border: 0.5px solid #E8D5B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-top: 12px;
+}
+
+.hiw-step-right {
+    padding-top: 12px;
+}
+
+.hiw-step-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #2E1B0E;
+    margin-bottom: 8px;
+}
+
+.hiw-step-desc {
+    font-size: 14px;
+    color: #6B4C35;
+    line-height: 1.7;
+}
+
+/* CTA banner */
+.hiw-cta-banner {
+    background-color: #5C3D22;
+    border-radius: 24px;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+.hiw-cta-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background: radial-gradient(circle at 80% 50%, #C8874A, transparent 60%);
+    pointer-events: none;
+}
+
+.hiw-cta-content {
+    position: relative;
+}
+
+.hiw-cta-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #FAF4ED;
+    margin-bottom: 6px;
+}
+
+.hiw-cta-sub {
+    font-size: 14px;
+    color: #FAF4ED99;
+}
+
+.hiw-cta-btn {
+    background-color: #C8874A;
+    color: #FAF4ED;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.hiw-cta-btn:hover {
+    background-color: #E8974A;
+}
+
+@media (min-width: 768px) {
+    .hiw-cta-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hiw-cta-title {
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hiw-section {
+        padding: 120px 0;
+    }
+
+    .hiw-step-title {
+        font-size: 22px;
+    }
+}

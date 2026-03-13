@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-function App() {
+import LoginRoleSelect from "./pages/auth/LoginRoleSelect"
+import CompanionScreen from "./pages/patient/CompanionScreen"
+import DailyRoutine from "./pages/patient/DailyRoutine"
+import CognitiveExercises from "./pages/patient/CognitiveExercises"
+import CaregiverDashboard from "./pages/caregiver/CaregiverDashboard"
+import AlertsNotifications from "./pages/caregiver/AlertsNotifications"
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginRoleSelect />} />
+        <Route path="/login" element={<LoginRoleSelect />} />
+        <Route path="/patient/companion" element={<CompanionScreen />} />
+        <Route path="/patient/routine" element={<DailyRoutine />} />
+        <Route path="/patient/exercises" element={<CognitiveExercises />} />
+        <Route path="/caregiver/dashboard" element={<CaregiverDashboard />} />
+        <Route path="/caregiver/alerts" element={<AlertsNotifications />} />
+        {/* catch-all goes to login, not redirect */}
+      </Routes>
+    </BrowserRouter>
+  )
 }
-
-export default App;

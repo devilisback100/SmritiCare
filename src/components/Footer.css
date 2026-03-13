@@ -1,0 +1,146 @@
+.footer {
+    background-color: #2E1B0E;
+    padding: 64px 0 0;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 0.5px solid #5C3D22;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.footer-logo-dot {
+    width: 30px;
+    height: 30px;
+    background-color: #C8874A;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #FAF4ED;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: #A08060;
+    line-height: 1.6;
+    max-width: 280px;
+    margin-bottom: 24px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 8px;
+}
+
+.footer-social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #3D2B1A;
+    border: 0.5px solid #5C3D22;
+    color: #A08060;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.footer-social-btn:hover {
+    background-color: #5C3D22;
+    color: #FAF4ED;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.footer-link-heading {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FAF4ED;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+
+.footer-link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-link {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #A08060;
+    cursor: pointer;
+    text-align: left;
+    font-family: system-ui, sans-serif;
+    transition: color 0.2s;
+    padding: 0;
+}
+
+.footer-link:hover {
+    color: #FAF4ED;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: #6B4C35;
+}
+
+@media (min-width: 768px) {
+    .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer-brand {
+        max-width: 280px;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-links {
+        gap: 48px;
+    }
+}

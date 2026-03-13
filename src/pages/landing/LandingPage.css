@@ -1,0 +1,80 @@
+.landing-page {
+    min-height: 100vh;
+    background-color: #FAF4ED;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.landing-grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 128px;
+    z-index: 0;
+}
+
+.landing-page main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Shared section styles */
+.section-container {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #8B5E3C;
+    background-color: #F0E8DC;
+    border: 0.5px solid #E8D5B8;
+    padding: 5px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+}
+
+.section-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: #2E1B0E;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.section-subheading {
+    font-size: 16px;
+    color: #A08060;
+    line-height: 1.7;
+    max-width: 540px;
+}
+
+@media (min-width: 768px) {
+    .section-heading {
+        font-size: 44px;
+    }
+
+    .section-container {
+        padding: 0 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-heading {
+        font-size: 52px;
+    }
+
+    .section-container {
+        padding: 0 40px;
+    }
+}

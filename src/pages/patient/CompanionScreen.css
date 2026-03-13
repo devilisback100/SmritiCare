@@ -1,0 +1,347 @@
+.companion-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #FAF4ED;
+}
+
+.companion-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.companion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+}
+
+.companion-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #2E1B0E;
+}
+
+.companion-bell {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #FDF9F5;
+    border: 0.5px solid #E8D5B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.companion-bell-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
+    background-color: #C04828;
+    border-radius: 50%;
+}
+
+.companion-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.companion-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 24px;
+}
+
+.companion-avatar-wrap {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.companion-avatar-circle {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C8874A, #8B5E3C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 8px 32px #C8874A33;
+    z-index: 1;
+}
+
+.companion-status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    background-color: #4A8C3F;
+    border-radius: 50%;
+    border: 2px solid #FAF4ED;
+    z-index: 2;
+}
+
+.companion-greeting {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #2E1B0E;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.companion-subgreeting {
+    font-size: 13px;
+    color: #A08060;
+    text-align: center;
+}
+
+.companion-voice-wrap {
+    margin: 0 20px 20px;
+}
+
+.companion-voice-bubble {
+    background-color: #FDF9F5;
+    border: 0.5px solid #E8D5B8;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.companion-voice-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #FAF4ED;
+    border: 0.5px solid #E8D5B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.companion-voice-text {
+    font-size: 13px;
+    color: #6B4C35;
+    line-height: 1.6;
+}
+
+.companion-voice-bars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 8px;
+}
+
+.companion-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 12px;
+}
+
+.companion-section-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6B4C35;
+    letter-spacing: 0.06em;
+}
+
+.companion-section-link {
+    font-size: 12px;
+    color: #8B5E3C;
+    cursor: pointer;
+}
+
+.companion-cards-wrap {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.companion-reminder-card {
+    background-color: #FDF9F5;
+    border: 0.5px solid #E8D5B8;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.companion-reminder-card.done {
+    opacity: 0.55;
+}
+
+.companion-r-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.companion-r-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2E1B0E;
+    margin-bottom: 2px;
+}
+
+.companion-r-time {
+    font-size: 12px;
+    color: #A08060;
+}
+
+.companion-badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.companion-badge-pending {
+    background: #FDE8D8;
+    color: #8C3D20;
+}
+
+.companion-badge-done {
+    background: #E6F4E3;
+    color: #2E6B28;
+}
+
+.companion-badge-upcoming {
+    background: #FEF3DC;
+    color: #7A4F00;
+}
+
+.companion-bottom-nav {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    z-index: 50;
+    background-color: #FDF9F5;
+    border-top: 0.5px solid #E8D5B8;
+    padding: 12px 0 20px;
+}
+
+.companion-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    opacity: 0.4;
+    background: transparent;
+    border: none;
+}
+
+.companion-nav-item.active {
+    opacity: 1;
+}
+
+.companion-nav-icon {
+    font-size: 20px;
+}
+
+.companion-nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #6B4C35;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .companion-header {
+        padding: 24px 32px 0;
+    }
+
+    .companion-voice-wrap {
+        margin: 0 32px 24px;
+    }
+
+    .companion-section-header {
+        padding: 0 32px;
+    }
+
+    .companion-cards-wrap {
+        padding: 0 32px;
+    }
+
+    .companion-avatar-circle {
+        width: 112px;
+        height: 112px;
+        font-size: 48px;
+    }
+
+    .companion-greeting {
+        font-size: 28px;
+    }
+
+    .companion-cards-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .companion-header {
+        padding: 32px 40px 0;
+    }
+
+    .companion-logo {
+        display: none;
+    }
+
+    .companion-voice-wrap {
+        margin: 0 40px 28px;
+    }
+
+    .companion-section-header {
+        padding: 0 40px;
+    }
+
+    .companion-cards-wrap {
+        padding: 0 40px;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .companion-bottom-nav {
+        display: none;
+    }
+
+    .companion-avatar-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 52px;
+    }
+
+    .companion-greeting {
+        font-size: 32px;
+    }
+}

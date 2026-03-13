@@ -1,0 +1,266 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background-color: #FAF4ED;
+    position: relative;
+}
+
+.login-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.login-logo-dot {
+    width: 36px;
+    height: 36px;
+    background-color: #5C3D22;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #2E1B0E;
+}
+
+.login-card {
+    width: 100%;
+    background-color: #FDF9F5;
+    border: 0.5px solid #E8D5B8;
+    border-radius: 20px;
+    padding: 32px 24px;
+}
+
+.login-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #2E1B0E;
+    margin-bottom: 6px;
+}
+
+.login-subtitle {
+    font-size: 14px;
+    color: #A08060;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.login-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6B4C35;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+}
+
+.login-input {
+    width: 100%;
+    background-color: #FAF4ED;
+    border: 0.5px solid #E8D5B8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #2E1B0E;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 16px;
+    font-family: system-ui, sans-serif;
+}
+
+.login-input:focus {
+    border-color: #C8874A;
+}
+
+.login-input::placeholder {
+    color: #A08060;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.login-divider-line {
+    flex: 1;
+    height: 0.5px;
+    background-color: #E8D5B8;
+}
+
+.login-divider-text {
+    font-size: 12px;
+    color: #A08060;
+}
+
+.login-role-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6B4C35;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+
+.login-role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.login-role-card {
+    background-color: #FAF4ED;
+    border: 0.5px solid #E8D5B8;
+    border-radius: 12px;
+    padding: 16px 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.login-role-card.active {
+    background-color: #FDF9F5;
+    border: 1.5px solid #8B5E3C;
+    box-shadow: 0 0 0 3px #C8874A22;
+}
+
+.login-role-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.login-role-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2E1B0E;
+}
+
+.login-role-desc {
+    font-size: 11px;
+    color: #A08060;
+    margin-top: 2px;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #5C3D22;
+    color: #FAF4ED;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    font-family: system-ui, sans-serif;
+    transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #2E1B0E;
+}
+
+.login-footer {
+    font-size: 12px;
+    color: #A08060;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.login-footer-link {
+    color: #8B5E3C;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .login-card {
+        max-width: 480px;
+        padding: 40px 40px;
+        margin: 0 auto;
+    }
+
+    .login-title {
+        font-size: 28px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .login-page {
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .login-left-panel {
+        display: flex !important;
+        flex: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 80px;
+        background-color: #5C3D22;
+        min-height: 100vh;
+    }
+
+    .login-left-heading {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 48px;
+        font-weight: 500;
+        color: #FAF4ED;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+
+    .login-left-sub {
+        font-size: 16px;
+        color: #FAF4ED99;
+        line-height: 1.7;
+        max-width: 400px;
+    }
+
+    .login-right-panel {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 80px;
+        min-height: 100vh;
+        background-color: #FAF4ED;
+    }
+
+    .login-card {
+        max-width: 420px;
+        width: 100%;
+    }
+
+    .login-logo {
+        display: none;
+    }
+}
+
+.login-left-panel {
+    display: none;
+}
+
+.login-right-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+}
