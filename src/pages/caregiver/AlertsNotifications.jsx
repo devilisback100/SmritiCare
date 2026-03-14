@@ -68,7 +68,8 @@ export default function AlertsNotifications() {
     useEffect(() => {
         if (!patientId) return
         fetchAlerts()
-    }, [patientId])
+    }, [patientId, fetchAlerts])
+
 
 
     const fetchAlerts = async () => {
