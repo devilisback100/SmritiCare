@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate, useLocation } from "react-router-dom"
+import { getUser, logout } from "../../utils/auth"
 
 const patientLinks = [
     { icon: "🏠", label: "Home", path: "/patient/companion" },
@@ -14,14 +15,6 @@ const caregiverLinks = [
     { icon: "📍", label: "Location", path: "/caregiver/location" },
     { icon: "⚙️", label: "Settings", path: "/caregiver/settings" },
 ]
-
-function getUser() {
-    try {
-        return JSON.parse(localStorage.getItem("user") || "{}")
-    } catch {
-        return {}
-    }
-}
 
 export function PatientSidebar() {
     const navigate = useNavigate()
@@ -75,28 +68,43 @@ export function PatientSidebar() {
                 })}
             </nav>
 
-            <div style={{
-                display: "flex", alignItems: "center", gap: 10,
-                padding: "12px 14px", borderRadius: 10,
-                backgroundColor: "#F0E8DC", border: "0.5px solid #E8D5B8",
-                marginTop: "auto"
-            }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: "auto" }}>
                 <div style={{
-                    width: 32, height: 32, borderRadius: 8,
-                    background: "linear-gradient(135deg, #C8874A, #8B5E3C)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 16
+                    display: "flex", alignItems: "center", gap: 10,
+                    padding: "12px 14px", borderRadius: 10,
+                    backgroundColor: "#F0E8DC", border: "0.5px solid #E8D5B8",
                 }}>
-                    🧓
+                    <div style={{
+                        width: 32, height: 32, borderRadius: 8,
+                        background: "linear-gradient(135deg, #C8874A, #8B5E3C)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: 16
+                    }}>
+                        🧓
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: "#2E1B0E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {user?.name || "Patient"}
+                        </p>
+                        <p style={{ fontSize: 11, color: "#A08060", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {user?.email || ""}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <p style={{ fontSize: 13, fontWeight: 500, color: "#2E1B0E" }}>
-                        {user?.name || "Patient"}
-                    </p>
-                    <p style={{ fontSize: 11, color: "#A08060" }}>
-                        {user?.email || "Patient"}
-                    </p>
-                </div>
+
+                <motion.button
+                    whileHover={{ x: 2 }} whileTap={{ scale: 0.97 }}
+                    onClick={logout}
+                    style={{
+                        display: "flex", alignItems: "center", gap: 10,
+                        padding: "10px 14px", borderRadius: 10,
+                        backgroundColor: "transparent", border: "0.5px solid #E8D5B8",
+                        cursor: "pointer", color: "#A08060", fontSize: 13,
+                    }}
+                >
+                    <span style={{ fontSize: 16 }}>🚪</span>
+                    Sign out
+                </motion.button>
             </div>
         </aside>
     )
@@ -154,27 +162,43 @@ export function CaregiverSidebar() {
                 })}
             </nav>
 
-            <div style={{
-                display: "flex", alignItems: "center", gap: 10,
-                padding: "12px 14px", borderRadius: 10,
-                backgroundColor: "#5C3D22", border: "0.5px solid #6B4C35",
-            }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <div style={{
-                    width: 32, height: 32, borderRadius: 8,
-                    backgroundColor: "#C8874A",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 16
+                    display: "flex", alignItems: "center", gap: 10,
+                    padding: "12px 14px", borderRadius: 10,
+                    backgroundColor: "#5C3D22", border: "0.5px solid #6B4C35",
                 }}>
-                    👩‍⚕️
+                    <div style={{
+                        width: 32, height: 32, borderRadius: 8,
+                        backgroundColor: "#C8874A",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: 16
+                    }}>
+                        👩‍⚕️
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: "#FAF4ED", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {user?.name || "Caregiver"}
+                        </p>
+                        <p style={{ fontSize: 11, color: "#A08060", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {user?.email || ""}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <p style={{ fontSize: 13, fontWeight: 500, color: "#FAF4ED" }}>
-                        {user?.name || "Caregiver"}
-                    </p>
-                    <p style={{ fontSize: 11, color: "#A08060" }}>
-                        {user?.email || "Caregiver"}
-                    </p>
-                </div>
+
+                <motion.button
+                    whileHover={{ x: 2 }} whileTap={{ scale: 0.97 }}
+                    onClick={logout}
+                    style={{
+                        display: "flex", alignItems: "center", gap: 10,
+                        padding: "10px 14px", borderRadius: 10,
+                        backgroundColor: "transparent", border: "0.5px solid #3D2B1A",
+                        cursor: "pointer", color: "#A08060", fontSize: 13,
+                    }}
+                >
+                    <span style={{ fontSize: 16 }}>🚪</span>
+                    Sign out
+                </motion.button>
             </div>
         </aside>
     )

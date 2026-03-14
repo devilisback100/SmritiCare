@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import Register from "./pages/auth/Register"
 
 import LandingPage from "./pages/landing/LandingPage"
 import LoginRoleSelect from "./pages/auth/LoginRoleSelect"
+import Register from "./pages/auth/Register"
 
 import CompanionScreen from "./pages/patient/CompanionScreen"
 import DailyRoutine from "./pages/patient/DailyRoutine"
@@ -11,8 +11,9 @@ import CognitiveExercises from "./pages/patient/CognitiveExercises"
 import CaregiverDashboard from "./pages/caregiver/CaregiverDashboard"
 import AlertsNotifications from "./pages/caregiver/AlertsNotifications"
 
-export default function App() {
+import ProtectedRoute from "./components/ProtectedRoute"
 
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -22,14 +23,24 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/patient">
-          <Route path="companion" element={<CompanionScreen />} />
-          <Route path="routine" element={<DailyRoutine />} />
-          <Route path="exercises" element={<CognitiveExercises />} />
+          <Route path="companion" element={
+            <ProtectedRoute><CompanionScreen /></ProtectedRoute>
+          } />
+          <Route path="routine" element={
+            <ProtectedRoute><DailyRoutine /></ProtectedRoute>
+          } />
+          <Route path="exercises" element={
+            <ProtectedRoute><CognitiveExercises /></ProtectedRoute>
+          } />
         </Route>
 
         <Route path="/caregiver">
-          <Route path="dashboard" element={<CaregiverDashboard />} />
-          <Route path="alerts" element={<AlertsNotifications />} />
+          <Route path="dashboard" element={
+            <ProtectedRoute><CaregiverDashboard /></ProtectedRoute>
+          } />
+          <Route path="alerts" element={
+            <ProtectedRoute><AlertsNotifications /></ProtectedRoute>
+          } />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
