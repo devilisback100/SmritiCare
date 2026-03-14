@@ -70,6 +70,7 @@ export default function AlertsNotifications() {
         fetchAlerts()
     }, [patientId])
 
+
     const fetchAlerts = async () => {
         setLoading(true)
         try {
