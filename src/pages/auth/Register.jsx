@@ -4,12 +4,17 @@ import { useNavigate } from "react-router-dom"
 import { fadeUp, scaleIn } from "../../variants"
 import "./Register.css"
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 const roles = [
     { id: "patient", icon: "🧓", label: "Patient", desc: "Daily companion" },
     { id: "caregiver", icon: "🩺", label: "Caregiver", desc: "Monitor & manage" },
 ]
+
+const ROLE_REDIRECT = {
+    patient: "/patient/companion",
+    caregiver: "/caregiver/dashboard",
+}
 
 const INITIAL_FORM = { name: "", email: "", phone: "", password: "", confirmPassword: "" }
 
@@ -42,7 +47,7 @@ export default function Register() {
 
         setLoading(true)
         try {
-            const res = await fetch(`${BASE_URL}/auth/register`, {
+            const registerRes = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -53,14 +58,36 @@ export default function Register() {
                 }),
             })
 
-            const data = await res.json()
+            const registerData = await registerRes.json()
 
-            if (!res.ok) {
-                setError(data?.message || "Registration failed. Please try again.")
+            if (!registerRes.ok) {
+                setError(registerData?.message || "Registration failed. Please try again.")
                 return
             }
 
-            navigate("/login")
+            const loginRes = await fetch(`${BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: form.email, password: form.password }),
+            })
+
+            const loginData = await loginRes.json()
+
+            if (!loginRes.ok) {
+                setError("Account created! Please sign in manually.")
+                navigate("/login")
+                return
+            }
+
+            localStorage.setItem("access_token", loginData.access_token)
+            localStorage.setItem("refresh_token", loginData.refresh_token)
+            localStorage.setItem("user", JSON.stringify({
+                ...loginData.user,
+                name: registerData.name ?? form.name,
+                email: registerData.email ?? form.email,
+            }))
+
+            navigate(ROLE_REDIRECT[selectedRole])
         } catch {
             setError("Network error. Please check your connection.")
         } finally {

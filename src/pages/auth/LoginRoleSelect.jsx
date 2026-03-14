@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { fadeUp, scaleIn } from "../../variants"
 import "./LoginRoleSelect.css"
 
-const BASE_URL = "https://23ljjvd2-3000.inc1.devtunnels.ms/"
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 const roles = [
     { id: "patient", icon: "🧓", label: "Patient", desc: "Daily companion" },

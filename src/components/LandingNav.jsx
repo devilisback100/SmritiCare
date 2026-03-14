@@ -35,7 +35,6 @@ export default function LandingNav() {
                 className={`landing-nav ${scrolled ? "scrolled" : ""}`}
             >
                 <div className="landing-nav-inner">
-                    {/* Logo */}
                     <button onClick={() => navigate("/")} className="landing-nav-logo">
                         <div className="landing-nav-logo-dot">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -47,7 +46,6 @@ export default function LandingNav() {
                         <span className="landing-nav-logo-text">Clara</span>
                     </button>
 
-                    {/* Desktop links */}
                     <div className="landing-nav-links">
                         {links.map(l => (
                             <button key={l.label} onClick={() => scrollTo(l.href)} className="landing-nav-link">
@@ -56,7 +54,6 @@ export default function LandingNav() {
                         ))}
                     </div>
 
-                    {/* CTA */}
                     <div className="landing-nav-cta">
                         <motion.button
                             whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}
@@ -67,14 +64,13 @@ export default function LandingNav() {
                         </motion.button>
                         <motion.button
                             whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate("/register")}
                             className="landing-nav-getstarted"
                         >
                             Get started
                         </motion.button>
                     </div>
 
-                    {/* Hamburger */}
                     <button onClick={() => setOpen(!open)} className="landing-nav-hamburger">
                         <span className={`ham-line ${open ? "open" : ""}`} />
                         <span className={`ham-line ${open ? "open" : ""}`} />
@@ -83,7 +79,6 @@ export default function LandingNav() {
                 </div>
             </motion.nav>
 
-            {/* Mobile menu */}
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -102,7 +97,7 @@ export default function LandingNav() {
                         <button onClick={() => { setOpen(false); navigate("/login") }} className="landing-mobile-signin">
                             Sign in
                         </button>
-                        <button onClick={() => { setOpen(false); navigate("/login") }} className="landing-mobile-getstarted">
+                        <button onClick={() => { setOpen(false); navigate("/register") }} className="landing-mobile-getstarted">
                             Get started free
                         </button>
                     </motion.div>

@@ -1,21 +1,35 @@
-// src/components/layout/AppSidebar.jsx
 import { motion } from "framer-motion"
 import { useNavigate, useLocation } from "react-router-dom"
+
+const patientLinks = [
+    { icon: "🏠", label: "Home", path: "/patient/companion" },
+    { icon: "📋", label: "Routine", path: "/patient/routine" },
+    { icon: "🧠", label: "Exercises", path: "/patient/exercises" },
+    { icon: "📖", label: "Journal", path: "/patient/journal" },
+]
+
+const caregiverLinks = [
+    { icon: "📊", label: "Dashboard", path: "/caregiver/dashboard" },
+    { icon: "🔔", label: "Alerts", path: "/caregiver/alerts" },
+    { icon: "📍", label: "Location", path: "/caregiver/location" },
+    { icon: "⚙️", label: "Settings", path: "/caregiver/settings" },
+]
+
+function getUser() {
+    try {
+        return JSON.parse(localStorage.getItem("user") || "{}")
+    } catch {
+        return {}
+    }
+}
 
 export function PatientSidebar() {
     const navigate = useNavigate()
     const location = useLocation()
-
-    const links = [
-        { icon: "🏠", label: "Home", path: "/patient/companion" },
-        { icon: "📋", label: "Routine", path: "/patient/routine" },
-        { icon: "🧠", label: "Exercises", path: "/patient/exercises" },
-        { icon: "📖", label: "Journal", path: "/patient/journal" },
-    ]
+    const user = getUser()
 
     return (
         <aside className="app-sidebar" style={{ backgroundColor: "#FDF9F5" }}>
-            {/* Logo */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
                 <div style={{
                     width: 36, height: 36, backgroundColor: "#5C3D22",
@@ -35,9 +49,8 @@ export function PatientSidebar() {
                 </span>
             </div>
 
-            {/* Nav links */}
             <nav style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
-                {links.map(link => {
+                {patientLinks.map(link => {
                     const active = location.pathname === link.path
                     return (
                         <motion.button
@@ -62,7 +75,6 @@ export function PatientSidebar() {
                 })}
             </nav>
 
-            {/* User */}
             <div style={{
                 display: "flex", alignItems: "center", gap: 10,
                 padding: "12px 14px", borderRadius: 10,
@@ -78,8 +90,12 @@ export function PatientSidebar() {
                     🧓
                 </div>
                 <div>
-                    <p style={{ fontSize: 13, fontWeight: 500, color: "#2E1B0E" }}>Clara</p>
-                    <p style={{ fontSize: 11, color: "#A08060" }}>Patient</p>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#2E1B0E" }}>
+                        {user?.name || "Patient"}
+                    </p>
+                    <p style={{ fontSize: 11, color: "#A08060" }}>
+                        {user?.email || "Patient"}
+                    </p>
                 </div>
             </div>
         </aside>
@@ -89,17 +105,10 @@ export function PatientSidebar() {
 export function CaregiverSidebar() {
     const navigate = useNavigate()
     const location = useLocation()
-
-    const links = [
-        { icon: "📊", label: "Dashboard", path: "/caregiver/dashboard" },
-        { icon: "🔔", label: "Alerts", path: "/caregiver/alerts" },
-        { icon: "📍", label: "Location", path: "/caregiver/location" },
-        { icon: "⚙️", label: "Settings", path: "/caregiver/settings" },
-    ]
+    const user = getUser()
 
     return (
         <aside className="app-sidebar dark">
-            {/* Logo */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
                 <div style={{
                     width: 36, height: 36, backgroundColor: "#C8874A",
@@ -120,7 +129,7 @@ export function CaregiverSidebar() {
             </div>
 
             <nav style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
-                {links.map(link => {
+                {caregiverLinks.map(link => {
                     const active = location.pathname === link.path
                     return (
                         <motion.button
@@ -145,7 +154,6 @@ export function CaregiverSidebar() {
                 })}
             </nav>
 
-            {/* User */}
             <div style={{
                 display: "flex", alignItems: "center", gap: 10,
                 padding: "12px 14px", borderRadius: 10,
@@ -154,13 +162,18 @@ export function CaregiverSidebar() {
                 <div style={{
                     width: 32, height: 32, borderRadius: 8,
                     backgroundColor: "#C8874A",
-                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 16
                 }}>
                     👩‍⚕️
                 </div>
                 <div>
-                    <p style={{ fontSize: 13, fontWeight: 500, color: "#FAF4ED" }}>Dr. Meera</p>
-                    <p style={{ fontSize: 11, color: "#A08060" }}>Caregiver</p>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#FAF4ED" }}>
+                        {user?.name || "Caregiver"}
+                    </p>
+                    <p style={{ fontSize: 11, color: "#A08060" }}>
+                        {user?.email || "Caregiver"}
+                    </p>
                 </div>
             </div>
         </aside>

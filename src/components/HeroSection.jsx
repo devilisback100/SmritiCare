@@ -16,7 +16,6 @@ export default function HeroSection() {
         <section className="hero-section" id="hero">
             <div className="section-container hero-container">
 
-                {/* Left — text */}
                 <div className="hero-text">
                     <motion.div
                         variants={fadeUp} initial="hidden" animate="visible" custom={0}
@@ -48,7 +47,7 @@ export default function HeroSection() {
                         <motion.button
                             whileHover={{ y: -2, boxShadow: "0 8px 24px #5C3D2244" }}
                             whileTap={{ scale: 0.97 }}
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate("/register")}
                             className="hero-btn-primary"
                         >
                             Start free trial
@@ -70,7 +69,6 @@ export default function HeroSection() {
                         No credit card required · Free 14-day trial
                     </motion.p>
 
-                    {/* Stats */}
                     <motion.div
                         variants={fadeUp} initial="hidden" animate="visible" custom={5}
                         className="hero-stats"
@@ -84,15 +82,12 @@ export default function HeroSection() {
                     </motion.div>
                 </div>
 
-                {/* Right — app preview card */}
                 <motion.div
                     variants={scaleIn} initial="hidden" animate="visible" custom={2}
                     className="hero-visual"
                 >
-                    {/* Glow blob */}
                     <div className="hero-glow" />
 
-                    {/* Phone mockup */}
                     <div className="hero-phone">
                         <div className="hero-phone-header">
                             <div className="hero-phone-dot" />
@@ -112,7 +107,6 @@ export default function HeroSection() {
                             You have 3 reminders today. Your medicine is due in 18 minutes.
                         </p>
 
-                        {/* Mini reminder cards */}
                         {[
                             { icon: "💊", title: "Morning medicine", time: "9:00 AM", status: "pending", bg: "#FDE8D8" },
                             { icon: "🍳", title: "Breakfast", time: "Done", status: "done", bg: "#FEF3DC" },
@@ -137,7 +131,6 @@ export default function HeroSection() {
                         ))}
                     </div>
 
-                    {/* Floating caregiver alert chip */}
                     <motion.div
                         initial={{ opacity: 0, y: 20, x: 20 }}
                         animate={{ opacity: 1, y: 0, x: 0 }}
@@ -152,7 +145,6 @@ export default function HeroSection() {
                         <span>Caregiver notified</span>
                     </motion.div>
 
-                    {/* Floating mood chip */}
                     <motion.div
                         initial={{ opacity: 0, y: -20, x: -20 }}
                         animate={{ opacity: 1, y: 0, x: 0 }}
@@ -164,7 +156,6 @@ export default function HeroSection() {
                 </motion.div>
             </div>
 
-            {/* Bottom wave divider */}
             <div className="hero-divider">
                 <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                     <path d="M0 30 C360 60 1080 0 1440 30 L1440 60 L0 60 Z" fill="#F0E8DC" />

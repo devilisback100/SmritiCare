@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import Register from "./pages/auth/Register"
 
 import LandingPage from "./pages/landing/LandingPage"
 import LoginRoleSelect from "./pages/auth/LoginRoleSelect"
@@ -11,12 +12,14 @@ import CaregiverDashboard from "./pages/caregiver/CaregiverDashboard"
 import AlertsNotifications from "./pages/caregiver/AlertsNotifications"
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <Routes>
 
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginRoleSelect />} />
+        <Route path="/register" element={<Register />} />
 
         <Route path="/patient">
           <Route path="companion" element={<CompanionScreen />} />
